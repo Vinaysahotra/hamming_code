@@ -1,0 +1,28 @@
+`timescale 10ns/1ns
+module tb;
+  reg [0:3]data;
+  wire [0:6]code;
+ reg p0,p1,p2;
+  hammmingcode dut(.data(data) ,.code(code)); 
+   initial
+    begin
+      $dumpfile("dump.vcd"); 
+      $dumpvars(1,tb);
+    end
+  initial
+    begin
+         #10     data<=4'b0000;
+         #10      data<=4'b0001;
+         #10    data<=4'b0010;  
+         #10    data<=4'b0111;
+      
+   
+      
+    end
+  initial
+    begin
+        #100 $finish;
+    end
+  
+ 
+endmodule
