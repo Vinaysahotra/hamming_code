@@ -1,0 +1,23 @@
+`timescale 1ns/1ns
+module tb2;
+  reg [0:6]d;
+  wire ans;
+  wire [0:6] correctcode;
+  errordetect dut(.d(d),.ans(ans),.correctcode(correctcode));
+   initial
+    begin
+      $dumpfile("dump.vcd"); 
+      $dumpvars(1,tb2);
+    end
+  initial
+    begin
+         #10     d<=7'b1011011;
+     
+    end
+  initial
+    begin
+        #100 $finish;
+    end
+  
+ 
+endmodule
