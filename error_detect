@@ -1,0 +1,51 @@
+`timescale 1ns/1ns
+module errordetect(d,ans,correctcode);
+  input wire[0:6] d;
+  output reg  ans;
+  output  reg [0:6] correctcode;
+  always @(*)
+    begin
+      if(d[6]!=d[4]^d[2]^d[0]&&d[5]!=d[4]^d[1]^d[0]&&d[3]!=d[2]^d[1]^d[0])
+        begin
+      correctcode={d[0:2],d[2]^d[1]^d[0],d[4],d[4]^d[1]^d[0],d[4]^d[2]^d[0]};
+   ans=1'b1;
+        end
+     else if(d[5]!=d[4]^d[1]^d[0]&&d[3]!=d[2]^d[1]^d[0])
+       begin
+       correctcode={d[0:2],d[2]^d[1]^d[0],d[4],d[4]^d[1]^d[0],d[6]};
+   ans=1'b1;
+       end
+     else if(d[6]!=d[4]^d[2]^d[0]&&d[3]!=d[2]^d[1]^d[0])
+       begin
+       correctcode={d[0:2],d[2]^d[1]^d[0],d[4:5],d[4]^d[2]^d[0]};
+   ans=1'b1;
+       end
+    else  if(d[6]!=d[4]^d[2]^d[0]&&d[5]!=d[4]^d[1]^d[0])
+      begin
+      correctcode={d[0:4],d[4]^d[1]^d[0],d[4]^d[2]^d[0]};
+   ans=1'b1;
+      end
+ else if(d[6]!=d[4]^d[2]^d[0])
+   begin
+   correctcode={d[0:5],d[4]^d[2]^d[0]};
+    ans=1'b1;
+   end
+ else  if(d[5]!=d[4]^d[1]^d[0])
+   begin
+    correctcode={d[0:5],d[4]^d[2]^d[0]};
+     ans=1'b1;
+   end
+  else if(d[3]!=d[2]^d[1]^d[0])
+    begin
+     correctcode={d[0:5],d[4]^d[2]^d[0]};
+     ans=1'b1;
+    end
+
+  else 
+    begin
+     ans=1'b0;
+        correctcode=d;
+    end
+    end
+   
+endmodule
