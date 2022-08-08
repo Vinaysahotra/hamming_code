@@ -11,7 +11,8 @@ module tb2;
     end
   initial
     begin
-         #10     d<=7'b1011011;
+         #10     d<=7'b1001011;
+       #10     d<=7'b1011011;
      
     end
   initial
